@@ -16,48 +16,34 @@
 		$stmt->bind_result($id_from_db, $user_id_from_db, $number_plate_from_db, $color_from_db);
 		$stmt->execute();
 		
-		//teeme nii, kuidas ei tohiks. ja hiljem teisiti.
-		$row_nr = 0;
+		//tekitame massiivi, kus hoiame auto nr KUHU.
+		$array = array();
 		
 		
-		//tekitame html tabeli
-		echo "<table border=5>";
-		echo "<tr><th>rea nr</th><th>auto nr märk</th></tr>";
-		
-		//1. variant whilega.
-        // iga rea kohta mis on ab'is teeme midagi
+		//iga rea kohta mid on ab's
         while($stmt->fetch()){
-            //saime andmed kätte
-			//sisestab tsükliga tabelisse.
-		
-			echo "<tr><td>$row_nr</td><td>$number_plate_from_db</td></tr>";
-            //echo $row_nr." ".$number_plate_from_db." <br>";
-            $row_nr++;
 			
-			//pm selline, aga halb variant. parem on tabeli väljatrükk teha table.php.
-			
-			//echo "<tr>";
-			//echo "<td>".$row_nr."</td>";
-			//echo "<td>".$number_plate_from_db."</td>";
-			//echo "</tr>";
-			
-			
+           //suvaline muutuja, kus hoiame auto andmeid selle hetkeni kui lisame massiivi
+		   
+		   //StdClass on tühi objekt, kus hoiame väärtusi. MIDA
+		   $car = new StdClass();
+		   $car->id = $id_from_db;
+		   $car->number_plate = $number_plate_from_db;
+		   
+		   //lisan massiivi. esiteks, KUHU lisame, teiseks, MIDA.
+		   
+		   array_push($array, $car);
+		   //var_dump võib echo asemel kasutada kui error on. annab andmed välja
+		   //echo "<pre>";
+		   //var_dump($array);
+		   //echo "</pre>"; //selleks, et korrastaks var_dump andmeid.
+
         }
-		echo "</table>";
-		
-		
-		//iga rea kohta teeme midagi. tsükkel. mis on andmebaasis. Seni kuni neid ridu on saadaval.
-		
-		//2. variant whilega.
-		while($stmt->fetch()){
-			echo($number_plate_from_db." ");
-			
-			//õnnestus, saime andmed kätte
-			//kuidas saada need andmed massiivi
-		}
+		//peale while tsüklit tagastame, et saaks table.php kasutada seda.
+		return $array;
+
         $stmt->close();
 		$mysqli->close();
-		
 		
 	}
 
