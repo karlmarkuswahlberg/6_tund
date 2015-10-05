@@ -44,6 +44,8 @@
 			echo "<td>".$car_array[$i]->user_id."</td>";
 			echo "<td><input name='number_plate' value='".$car_array[$i]->number_plate."'></td>";
 			echo "<td><input name='color' value='".$car_array[$i]->color."'></td>";
+			echo "<td><a href='table.php'>cancel</a></td>";
+			echo "<td><a href='?updateID=".$car_array[$i]->id."'>salvesta</a></td>";
 			echo"</tr>";
 			
 		}else{
@@ -53,6 +55,7 @@
 			echo "<td>".$car_array[$i]->color."</td>";
 			echo "<td><a href='?delete=".$car_array[$i]->id."'>X</a></td>";
 			echo "<td><a href='?edit=".$car_array[$i]->id."'>edit</a></td>";
+			
 			echo "</tr>";
 			//echo $car_array[$i]->id."<br>";
 			//echo $car_array[$i]->number_plate."<br>";
