@@ -7,9 +7,9 @@
 	//selleks, et kuvada tabel lehel vĆ¤lja. 
 	function getAllData(){
 		
-		
+		//deleted is NULL, ei ole kustutatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, user_id, number_plate, color FROM car_plates");
+		$stmt = $mysqli->prepare("SELECT id, user_id, number_plate, color FROM car_plates WHERE deleted is NULL");
 	//kuna küsimärke pole, siis bind_param jääb vahele.
 	
 	//seob selle, mis tabelist saadud, nende muutujatega bind result.
@@ -50,6 +50,20 @@
         $stmt->close();
 		$mysqli->close();
 		
+	}
+	function deleteCarData($car_id){
+		 $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		 
+		 //uuendan välja deleted, lisan praeguse date'i
+		 $stmt = $mysqli->prepare("UPDATE car_plates SET deleted=NOW() WHERE id=?");
+		 $stmt->bind_param("i", $car_id);
+		 $stmt->execute();
+		 
+		 //tühjendame aadressiriba, siis ei jää sinna ?deleted=10 rida.
+		 header("Location: table.php");
+		 
+		 $stmt->close();
+		 $mysqli->close();
 	}
 
 ?>

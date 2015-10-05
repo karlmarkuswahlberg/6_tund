@@ -3,6 +3,15 @@
 	require_once("functions.php"); //selleks, et leiaks üles getAllData fn.
 	//kõik mis functions.php tehti, kuvab siia.
 	
+	//kuulan, kas kasutaja tahab kustutada. aadressiribal ?delete=2 nt. selle järgi.
+	if(isset($_GET["delete"])){
+		
+		//saadan kustutatava auto id
+		deleteCarData($_GET["delete"]);
+	}
+	
+	
+	
 	//saadan return andmed siia. kõik autod objektide kujul massiivis. 
 	$car_array = getAllData();
 	
