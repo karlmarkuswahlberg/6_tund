@@ -34,6 +34,13 @@
             //echo $row_nr." ".$number_plate_from_db." <br>";
             $row_nr++;
 			
+			//pm selline, aga halb variant. parem on tabeli väljatrükk teha table.php.
+			
+			//echo "<tr>";
+			//echo "<td>".$row_nr."</td>";
+			//echo "<td>".$number_plate_from_db."</td>";
+			//echo "</tr>";
+			
 			
         }
 		echo "</table>";
