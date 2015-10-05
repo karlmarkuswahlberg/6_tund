@@ -25,6 +25,7 @@
 	<th>Auto NR</th>
 	<th>Värv</th>
 	<th>Kustuta</th>
+	<th>Edit</th>
 	
 </tr>
 <?php
@@ -35,15 +36,27 @@
 		//trükib nr lauad välja.
 		//lihtsalt muutujad saab echoga ka jutumärkide sees. Aga kui juba klassid ja objektid, siis on vaja lõpetada ära ja punktide vahele.
 		
-		echo "<tr><td>".$car_array[$i]->id."</td>";
-		echo "<td>".$car_array[$i]->user_id."</td>";
-		echo "<td>".$car_array[$i]->number_plate."</td>";
-		echo "<td>".$car_array[$i]->color."</td>";
-		
-		echo "<td><a href='?delete=".$car_array[$i]->id."'>X</a></td>";
-		echo "</tr>";
-		//echo $car_array[$i]->id."<br>";
-		//echo $car_array[$i]->number_plate."<br>";
+		//kasutaja saab rida muuta, kui aadressireale tekib edit.
+		if(isset($_GET["edit"]) && $_GET["edit"] ==  $car_array[$i]->id){
+			
+			echo "<tr>";
+			echo "<td>".$car_array[$i]->id."</td>";
+			echo "<td>".$car_array[$i]->user_id."</td>";
+			echo "<td><input name='number_plate' value='".$car_array[$i]->number_plate."'></td>";
+			echo "<td><input name='color' value='".$car_array[$i]->color."'></td>";
+			echo"</tr>";
+			
+		}else{
+			echo "<tr><td>".$car_array[$i]->id."</td>";
+			echo "<td>".$car_array[$i]->user_id."</td>";
+			echo "<td>".$car_array[$i]->number_plate."</td>";
+			echo "<td>".$car_array[$i]->color."</td>";
+			echo "<td><a href='?delete=".$car_array[$i]->id."'>X</a></td>";
+			echo "<td><a href='?edit=".$car_array[$i]->id."'>edit</a></td>";
+			echo "</tr>";
+			//echo $car_array[$i]->id."<br>";
+			//echo $car_array[$i]->number_plate."<br>";
+		}
 		
 	}
 	
